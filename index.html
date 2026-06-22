@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Italy 2026 — Venice Itinerary</title>
+<style>
+  :root{
+    --ink:#1f2a2e; --ink-soft:#3c4a4f; --cream:#f6f1e7; --cream-2:#efe7d6;
+    --paper:#fbf8f1; --brass:#b08a3e; --brass-2:#caa75e; --teal:#1f6f6b;
+    --teal-soft:#2d8a85; --rose:#9c5b53; --line:#ddd2bd; --muted:#8a8170;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--cream); color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.55;
+  }
+  a{color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(31,111,107,.3);}
+  a:hover{border-bottom-color:var(--teal);}
+
+  header.masthead{
+    background:var(--ink); color:var(--cream); padding:34px 24px 26px; text-align:center;
+    border-bottom:4px solid var(--brass);
+  }
+  .masthead .eyebrow{letter-spacing:.34em; text-transform:uppercase; font-size:12px; color:var(--brass-2); font-family:Helvetica,Arial,sans-serif;}
+  .masthead h1{margin:.25em 0 .15em; font-size:38px; font-weight:600; letter-spacing:.02em;}
+  .masthead .sub{color:#cfd6d3; font-size:15px;}
+  .masthead .party{margin-top:10px; font-size:13px; color:#aeb8b4; font-family:Helvetica,Arial,sans-serif;}
+
+  nav.daynav{
+    position:sticky; top:0; z-index:20; background:var(--paper);
+    border-bottom:1px solid var(--line); display:flex; flex-wrap:wrap; gap:6px;
+    justify-content:center; padding:10px 12px; box-shadow:0 2px 10px rgba(0,0,0,.05);
+  }
+  nav.daynav a{
+    font-family:Helvetica,Arial,sans-serif; font-size:12.5px; letter-spacing:.04em;
+    color:var(--ink-soft); border:1px solid var(--line); border-radius:999px;
+    padding:6px 13px; background:#fff;
+  }
+  nav.daynav a:hover{background:var(--ink); color:var(--cream); border-color:var(--ink);}
+  nav.daynav a.soon{opacity:.5;}
+
+  .wrap{max-width:1020px; margin:0 auto; padding:0 20px;}
+
+  .legend{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; padding:18px 12px 4px; font-family:Helvetica,Arial,sans-serif; font-size:12px; color:var(--ink-soft);}
+  .legend .tag{display:inline-flex; align-items:center; gap:6px;}
+  .pill{display:inline-block; font-family:Helvetica,Arial,sans-serif; font-size:10.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px; color:#fff; white-space:nowrap;}
+  .pill.fixed{background:var(--brass);}
+  .pill.options{background:var(--teal);}
+  .pill.optional{background:#a59b86;}
+  .pill.transit{background:var(--ink-soft);}
+  .pill.book{background:var(--rose);}
+
+  section.day{padding:30px 0 10px; border-top:1px solid var(--line); margin-top:18px;}
+  .day-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap; margin-bottom:4px;}
+  .day-head .num{font-family:Helvetica,Arial,sans-serif; font-size:12px; letter-spacing:.2em; color:var(--brass); text-transform:uppercase;}
+  .day-head h2{margin:0; font-size:27px; font-weight:600;}
+  .day-head .dow{color:var(--muted); font-size:16px;}
+  .day-summary{color:var(--ink-soft); font-size:15px; margin:2px 0 20px; font-style:italic;}
+
+  .block{margin:0 0 16px; background:var(--paper); border:1px solid var(--line); border-radius:12px; overflow:hidden;}
+  .block-head{display:flex; align-items:center; gap:10px; padding:11px 18px; background:var(--cream-2); border-bottom:1px solid var(--line);}
+  .block-head .pod{font-family:Helvetica,Arial,sans-serif; font-size:12px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--ink);}
+  .block-head .pod .clock{color:var(--muted); font-weight:400; letter-spacing:.04em; margin-left:6px;}
+
+  .item{display:grid; grid-template-columns:170px 1fr; gap:18px; padding:18px; border-bottom:1px dashed var(--line);}
+  .item:last-child{border-bottom:none;}
+  .item .media{position:relative; height:122px; border-radius:9px; overflow:hidden; background:#ddd; border:1px solid var(--line);}
+  .item .media img{width:100%; height:100%; object-fit:cover; display:block;}
+  .item .media .ph{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; color:#fff; padding:8px;}
+  .item .media .ph .glyph{font-size:30px; line-height:1; filter:drop-shadow(0 1px 2px rgba(0,0,0,.3));}
+  .item .media .ph .lbl{font-family:Helvetica,Arial,sans-serif; font-size:10px; letter-spacing:.05em; margin-top:7px; opacity:.92;}
+  .item .media .ph .slot{font-family:Helvetica,Arial,sans-serif; font-size:9px; letter-spacing:.03em; margin-top:4px; opacity:.8; border-top:1px solid rgba(255,255,255,.4); padding-top:4px;}
+  .g-glass{background:linear-gradient(135deg,#1f6f6b,#0e3b3a);}
+  .g-doge{background:linear-gradient(135deg,#7a5a8c,#3a2747);}
+  .g-row{background:linear-gradient(135deg,#2f7fae,#163a52);}
+  .g-ghetto{background:linear-gradient(135deg,#9c7b3e,#4a3818);}
+  .g-mask{background:linear-gradient(135deg,#b0563f,#5a2419);}
+  .g-boat{background:linear-gradient(135deg,#3a7e7a,#16332f);}
+  .g-dine{background:linear-gradient(135deg,#a07b4e,#4a3320);}
+  .g-walk{background:linear-gradient(135deg,#6f7d6a,#33402f);}
+  .g-arrive{background:linear-gradient(135deg,#36607e,#16303f);}
+  .g-train{background:linear-gradient(135deg,#5a6470,#2c333c);}
+
+  .item .body h3{margin:0 0 5px; font-size:18px; font-weight:600;}
+  .item .body .meta{font-family:Helvetica,Arial,sans-serif; font-size:12px; color:var(--muted); margin:0 0 8px; display:flex; flex-wrap:wrap; gap:8px 14px; align-items:center;}
+  .item .body p{margin:0 0 8px; font-size:14.5px; color:var(--ink-soft);}
+  .item .body .line{font-size:13.5px; margin:5px 0 0;}
+  .item .body .line b{font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--brass); margin-right:6px;}
+  .item .body .eat{background:#fff; border:1px solid var(--line); border-left:3px solid var(--brass); border-radius:6px; padding:8px 11px; margin-top:10px; font-size:13.5px;}
+  .item .body .eat b{font-family:Helvetica,Arial,sans-serif; font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--brass);}
+
+  .garda{background:var(--ink); color:var(--cream); border-radius:14px; padding:30px; text-align:center; margin:26px 0 40px;}
+  .garda .eyebrow{letter-spacing:.3em; text-transform:uppercase; font-size:11px; color:var(--brass-2); font-family:Helvetica,Arial,sans-serif;}
+  .garda h2{margin:.3em 0; font-size:24px;}
+  .garda p{color:#c2cbc7; font-size:14px; max-width:620px; margin:8px auto 0;}
+  .garda .chips{margin-top:16px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center;}
+  .garda .chips span{font-family:Helvetica,Arial,sans-serif; font-size:11.5px; border:1px solid #44514f; border-radius:999px; padding:5px 12px; color:#dfe6e3;}
+
+  footer{text-align:center; padding:26px 20px 40px; color:var(--muted); font-size:12.5px; font-family:Helvetica,Arial,sans-serif;}
+  .updated{font-style:italic;}
+
+  @media(max-width:640px){
+    .item{grid-template-columns:1fr;}
+    .item .media{height:180px;}
+    .masthead h1{font-size:30px;}
+  }
+  *{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
+  @media print{
+    nav.daynav{position:static; box-shadow:none;}
+    .item,.block,.garda{break-inside:avoid;}
+    section.day{break-after:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="eyebrow">Family Italy · August 2026</div>
+  <h1>Venice</h1>
+  <div class="sub">Hotel Nani Mocenigo Palace · Dorsoduro · Aug 16–19</div>
+  <div class="party">Miriam · Nat · Françoise · Kal · Aaron</div>
+</header>
+
+<nav class="daynav">
+  <a href="#d16">Sun 16 · Arrival</a>
+  <a href="#d17">Mon 17 · Murano + Ghetto</a>
+  <a href="#d18">Tue 18 · Doge's + Rowing</a>
+  <a href="#d19">Wed 19 · To Garda</a>
+  <a href="#garda" class="soon">Lake Garda · soon</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="legend">
+    <span class="tag"><span class="pill fixed">Fixed time</span></span>
+    <span class="tag"><span class="pill options">Time options</span></span>
+    <span class="tag"><span class="pill optional">Optional</span></span>
+    <span class="tag"><span class="pill transit">Transit</span></span>
+  </div>
+
+  <!-- ===================== AUG 16 ===================== -->
+  <section class="day" id="d16">
+    <div class="day-head">
+      <span class="num">Day 1</span>
+      <h2>August 16</h2><span class="dow">Sunday · Arrival</span>
+    </div>
+    <p class="day-summary">Arrive by water and settle into Dorsoduro. An easy first evening — dinner, gelato, a short walk.</p>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Afternoon<span class="clock">· from ~5:30 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg/1280px-View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg" alt="Grand Canal, Venice" data-g="g-arrive" data-glyph="🛥️" data-lbl="Water-taxi arrival"></div>
+        <div class="body">
+          <h3>Arrive Marco Polo → private water taxi to the hotel</h3>
+          <div class="meta"><span class="pill transit">~5:30 PM</span><span>~30 min on the water</span></div>
+          <p>A private water taxi straight from the airport dock to Nani Mocenigo Palace — the calm way in with bags and tired kids, and a beautiful first look at the lagoon.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Hotel%20Nani%20Mocenigo%20Palace%20Venezia" target="_blank">Hotel Nani Mocenigo Palace</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Evening</span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/9/92/Spaghettoni.jpg" alt="Spaghetti" data-g="g-dine" data-glyph="🍝" data-lbl="Arrival dinner"></div>
+        <div class="body">
+          <h3>Settle in · dinner · gelato · gentle stroll</h3>
+          <div class="meta"><span class="pill optional">Low-key</span><span>close to the hotel</span></div>
+          <p>Check in, then a relaxed dinner nearby. Gelato, and a short walk along the Zattere with the Accademia bridge for a first Grand Canal view.</p>
+          <div class="eat"><b>Eat</b> &nbsp;Dorsoduro / Zattere — simple Venetian, outdoor if possible. <em>Dinner spot TBD.</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AUG 17 ===================== -->
+  <section class="day" id="d17">
+    <div class="day-head">
+      <span class="num">Day 2</span>
+      <h2>August 17</h2><span class="dow">Monday · Murano + Jewish Ghetto</span>
+    </div>
+    <p class="day-summary">A glass morning on Murano, then the Jewish Ghetto in Cannaregio on the way back.</p>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Morning<span class="clock">· ~8:45 AM – 12:15 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Glass_bubble.jpg/1280px-Glass_bubble.jpg" alt="Glassblowing" data-g="g-glass" data-glyph="🔥" data-lbl="Wave — glass furnace"></div>
+        <div class="body">
+          <h3>Wave Murano Glass — Factory Tour</h3>
+          <div class="meta"><span class="pill fixed">9:30 AM</span><span>~45–60 min · max 8</span></div>
+          <p>A real working contemporary furnace, watching the masters blow and shape molten glass.</p>
+          <p class="line"><b>Vaporetto</b>Line 4.1/4.2 from <strong>Zattere → Murano Colonna</strong> (~40–45 min) — board the direction via San Zaccaria &amp; Fondamente Nove (the short arc; it's a circular line). Private taxi (~20 min) if protecting the 9:30 start.</p>
+          <p class="line"><b>Details</b><a href="https://wavemuranoglass.com/en/guided-tour/" target="_blank">wavemuranoglass.com</a> · <b style="margin-left:6px;">Map</b><a href="https://www.google.com/maps/search/?api=1&query=Wave%20Murano%20Glass%20Fondamenta%20da%20Mula%20152%20Murano" target="_blank">Open in Maps</a></p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/7034DavidPatchenExampleofMurrine.jpg" alt="Murrine glass" data-g="g-glass" data-glyph="🎨" data-lbl="Mosaic workshop"></div>
+        <div class="body">
+          <h3>Vianello Nadia Murrine — Mosaic (murrina) workshop</h3>
+          <div class="meta"><span class="pill options">11:00 AM · slots 10/11/2/3</span><span>1 hour</span></div>
+          <p>Hands-on, no flame — everyone composes their own millefiori glass pendant; the studio fires it and ships it to you.</p>
+          <p class="line"><b>Details</b><a href="https://vianellonadiamurrine.com/pages/glass-workshop" target="_blank">vianellonadiamurrine.com</a> · <b style="margin-left:6px;">Map</b><a href="https://www.google.com/maps/search/?api=1&query=Vianello%20Nadia%20Murrine%20Murano" target="_blank">Open in Maps</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Afternoon<span class="clock">· ~12:30 – 3:30 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Ghetto_%28Venice%29_Panorama.jpg/1280px-Ghetto_%28Venice%29_Panorama.jpg" alt="Venetian Ghetto, Cannaregio" data-g="g-ghetto" data-glyph="🕍" data-lbl="Jewish Ghetto"></div>
+        <div class="body">
+          <h3>Jewish Ghetto — guided tour</h3>
+          <div class="meta"><span class="pill fixed">2:00 PM</span><span>~1 hr · English</span></div>
+          <p>The world's first ghetto, in Cannaregio — the campo, the tall buildings, the synagogues. Lunch in Cannaregio beforehand.</p>
+          <p class="line"><b>Vaporetto</b>Line 4.1 from <strong>Murano → Guglie</strong> (~30 min), ~2-min walk; back to the hotel <strong>Guglie → Zattere</strong> (Line 4.2/5.2)</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Museo%20Ebraico%20Venezia%20Campo%20del%20Ghetto%20Nuovo" target="_blank">Ghetto Nuovo / Museo Ebraico</a></p>
+          <div class="eat"><b>Eat</b> &nbsp;Cannaregio. Kosher option: <strong>Gam Gam</strong> by the canal (reserve; closed Fri PM–Sat). Otherwise a quiet Cannaregio bacaro.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Evening<span class="clock">· optional — pick one or none</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Venice_Carnival_-_Masked_Lovers_%282010%29.jpg/1280px-Venice_Carnival_-_Masked_Lovers_%282010%29.jpg" alt="Venetian masks" data-g="g-mask" data-glyph="🎭" data-lbl="Mask painting"></div>
+        <div class="body">
+          <h3>Ca' Macana — mask painting <span style="font-weight:400;color:var(--muted);font-size:14px;">(optional)</span></h3>
+          <div class="meta"><span class="pill optional">~5:00 PM</span><span>1 hr · Dorsoduro</span><span>pay on the spot</span></div>
+          <p>Near the hotel, no advance booking — decorate a papier-mâché mask and take it home. Offered both evenings (17th &amp; 18th).</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Ca%27%20Macana%20Dorsoduro%20Venezia" target="_blank">Ca' Macana</a></p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg/1280px-View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg" alt="Grand Canal at dusk" data-g="g-boat" data-glyph="🌅" data-lbl="Sunset boat"></div>
+        <div class="body">
+          <h3>Sunset private boat <span style="font-weight:400;color:var(--muted);font-size:14px;">(optional)</span></h3>
+          <div class="meta"><span class="pill optional">Golden hour</span></div>
+          <p>A relaxed glide through the canals at golden hour. Offered both evenings (17th &amp; 18th).</p>
+          <div class="eat"><b>Eat</b> &nbsp;Dinner in Dorsoduro. <em>Dinner spot TBD.</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AUG 18 ===================== -->
+  <section class="day" id="d18">
+    <div class="day-head">
+      <span class="num">Day 3</span>
+      <h2>August 18</h2><span class="dow">Tuesday · Doge's Palace + Rowing</span>
+    </div>
+    <p class="day-summary">Doge's Palace secret rooms in the morning, the main sights on foot, then a Venetian rowing lesson.</p>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Morning<span class="clock">· 10:00 AM – ~12:30 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/%28Venice%29_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg/1280px-%28Venice%29_Doge%27s_Palace_and_campanile_of_St._Mark%27s_Basilica_facing_the_sea.jpg" alt="Doge's Palace" data-g="g-doge" data-glyph="🏛️" data-lbl="Doge's secret rooms"></div>
+        <div class="body">
+          <h3>Doge's Palace — Secret Itineraries tour</h3>
+          <div class="meta"><span class="pill fixed">10:00 AM</span><span>~75–90 min</span></div>
+          <p>Hidden passages, the prison, the leads and the wooden cells — the secret-rooms route through the Palace, capped short.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Palazzo%20Ducale%20Venezia" target="_blank">Palazzo Ducale</a></p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Piazza_San_Marco_%28Venice%29_at_night-msu-2021-6449-.jpg/1280px-Piazza_San_Marco_%28Venice%29_at_night-msu-2021-6449-.jpg" alt="Piazza San Marco" data-g="g-walk" data-glyph="🚶" data-lbl="San Marco → Rialto"></div>
+        <div class="body">
+          <h3>Walk-around: Piazza San Marco → Rialto</h3>
+          <div class="meta"><span class="pill options">Self-guided · after the tour</span></div>
+          <p>Out into Piazza San Marco — the square and Basilica exterior — then amble toward the Rialto bridge and across into San Polo for lunch.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Piazza%20San%20Marco%20Venezia" target="_blank">Piazza San Marco</a> · <a href="https://www.google.com/maps/search/?api=1&query=Ponte%20di%20Rialto%20Venezia" target="_blank">Rialto Bridge</a></p>
+          <div class="eat"><b>Eat</b> &nbsp;Lunch in San Polo near Rialto — bacaro / cicchetti, simple pasta &amp; seafood. <em>Spot TBD.</em></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Afternoon<span class="clock">· 2:00 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Gondola_Ride.jpg/1280px-Gondola_Ride.jpg" alt="Venetian rowing" data-g="g-row" data-glyph="🚣" data-lbl="Venetian rowing"></div>
+        <div class="body">
+          <h3>Venetian Rowing Lesson — private, 5-person batela</h3>
+          <div class="meta"><span class="pill fixed">2:00 PM</span><span>80 min · 2 instructors</span><span>departs Cannaregio</span></div>
+          <p>The whole family in one traditional batela, learning <em>voga alla veneta</em> — standing Venetian rowing — with two instructors.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Cannaregio%20Venezia" target="_blank">Cannaregio</a> <span style="color:var(--muted);">(exact dock confirmed at booking)</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Evening<span class="clock">· optional — pick one or none</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Venice_Carnival_-_Masked_Lovers_%282010%29.jpg/1280px-Venice_Carnival_-_Masked_Lovers_%282010%29.jpg" alt="Venetian masks" data-g="g-mask" data-glyph="🎭" data-lbl="Mask painting"></div>
+        <div class="body">
+          <h3>Ca' Macana — mask painting <span style="font-weight:400;color:var(--muted);font-size:14px;">(optional)</span></h3>
+          <div class="meta"><span class="pill optional">~5:00 PM</span><span>1 hr · Dorsoduro</span><span>pay on the spot</span></div>
+          <p>Near the hotel, no advance booking — decorate a papier-mâché mask and take it home.</p>
+        </div>
+      </div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg/1280px-View_of_the_Grand_Canal_from_Rialto_to_Ca%27Foscari.jpg" alt="Grand Canal at dusk" data-g="g-boat" data-glyph="🌅" data-lbl="Sunset boat"></div>
+        <div class="body">
+          <h3>Sunset private boat <span style="font-weight:400;color:var(--muted);font-size:14px;">(optional)</span></h3>
+          <div class="meta"><span class="pill optional">Golden hour</span></div>
+          <p>A relaxed glide through the canals at golden hour.</p>
+          <div class="eat"><b>Eat</b> &nbsp;Dinner in Dorsoduro or San Polo. <em>Dinner spot TBD.</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== AUG 19 ===================== -->
+  <section class="day" id="d19">
+    <div class="day-head">
+      <span class="num">Day 4</span>
+      <h2>August 19</h2><span class="dow">Wednesday · Venice → Lake Garda</span>
+    </div>
+    <p class="day-summary">Travel morning to Lake Garda.</p>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Morning<span class="clock">· train 12:10 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/6/66/FS_ALe_501_040_Patti-S_Piero_Patti_2018-06-22.jpg" alt="Italian regional train" data-g="g-train" data-glyph="🚆" data-lbl="Train to Peschiera"></div>
+        <div class="body">
+          <h3>Slow morning → water taxi to Santa Lucia → train</h3>
+          <div class="meta"><span class="pill transit">Transit</span><span>train 12:10 PM</span><span>Venezia S.L. → Peschiera del Garda</span></div>
+          <p>Slow breakfast, pack, a last gelato near the hotel, check out, then a private water taxi to Santa Lucia with margin for the train.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Venezia%20Santa%20Lucia%20railway%20station" target="_blank">Venezia Santa Lucia</a> · <a href="https://www.google.com/maps/search/?api=1&query=Stazione%20Peschiera%20del%20Garda" target="_blank">Peschiera del Garda</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-head"><span class="pod">Afternoon · arrival<span class="clock">· Peschiera ~2:00 PM</span></span></div>
+      <div class="item">
+        <div class="media"><img loading="lazy" src="https://www.cortevalier.com/application/files/8017/1983/1588/luxury-stay-1-_1__3.webp" alt="Corte Valier outdoor pool, Lazise" data-g="g-boat" data-glyph="🏊" data-lbl="Corte Valier pool"></div>
+        <div class="body">
+          <h3>Peschiera → taxi to Lazise → Avis rental → Corte Valier</h3>
+          <div class="meta"><span class="pill transit">~2:00 PM</span><span>taxi Peschiera → Lazise</span><span>Avis pickup in Lazise</span><span>half-board hotel</span></div>
+          <p>Arrive Peschiera around 2:00 PM, taxi to Lazise. Miriam collects the rental car from Avis in Lazise; everyone settles in at Corte Valier. Easy arrival, pool time, maybe a Lazise old-town wander before dinner at the hotel.</p>
+          <p class="line"><b>Map</b><a href="https://www.google.com/maps/search/?api=1&query=Avis%20Lazise" target="_blank">Avis Lazise</a> · <a href="https://www.google.com/maps/search/?api=1&query=Corte%20Valier%20Lazise" target="_blank">Corte Valier</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GARDA PLACEHOLDER ===================== -->
+  <div class="garda" id="garda">
+    <div class="eyebrow">Coming next</div>
+    <h2>Lake Garda · Aug 19–23</h2>
+    <p>Corte Valier, Lazise (half-board). The relaxed, water-and-play half of the trip. Day-by-day to be added as bookings firm up.</p>
+    <div class="chips">
+      <span>Gardaland</span><span>Private skippered boat + swim stops</span><span>Kids' fishing</span>
+      <span>Pizza-making class</span><span>Bikes + lido</span><span>Optional: Il Vittoriale</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div>A living plan — shared between Miriam, Nat &amp; Françoise. Times tagged <em>fixed</em> are confirmed slots; <em>options</em> are still flexible.</div>
+  <div class="updated">Last updated 21 June 2026</div>
+</footer>
+
+<script>
+  // If any photo fails to load, fall back to the styled placeholder panel.
+  document.querySelectorAll('.media img[data-g]').forEach(function(img){
+    img.addEventListener('error', function(){
+      var m = img.closest('.media'); var d = img.dataset;
+      m.classList.add('noimg', d.g);
+      m.innerHTML = '<div class="ph"><div class="glyph">' + d.glyph + '</div><div class="lbl">' + d.lbl + '</div></div>';
+    });
+  });
+</script>
+
+</body>
+</html>
